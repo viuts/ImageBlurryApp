@@ -7,14 +7,14 @@
  */
 
 import React, {useState} from 'react';
-import {SafeAreaView, StatusBar, Button, View, Text} from 'react-native';
+import {SafeAreaView, StatusBar, Button, View, Text, Platform} from 'react-native';
 
 import RNPytorch from 'react-native-pytorch';
 import ImagePicker from 'react-native-image-picker';
 
 const App = () => {
   const [results, setResults] = useState([]);
-  RNPytorch.loadModel('blurry', 'words')
+  RNPytorch.loadModel('blurry.pt', 'words.txt')
     .then(() => console.log('done'))
     .catch(err => console.log(err));
   return (
@@ -32,8 +32,9 @@ const App = () => {
                   if (!response.uri) {
                     return;
                   }
+                  const filePath = Platform.OS === 'android' ? response.path : response.uri;
                   // console.time('inferrece');
-                  const result = await RNPytorch.predict(response.uri);
+                  const result = await RNPytorch.predict(filePath);
                   // console.timeEnd('inferrece');
                   console.log(result);
                   setResults(result);

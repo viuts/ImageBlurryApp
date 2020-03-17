@@ -34,5 +34,8 @@ allprojects {
         google()
         jcenter()
         maven { url 'https://jitpack.io' }
+        maven {
+            url("$rootDir/../node_modules/react-native-pytorch/android/libs")
+        }
     }
 }
