@@ -14,7 +14,7 @@ import ImagePicker from 'react-native-image-picker';
 
 const App = () => {
   const [results, setResults] = useState([]);
-  RNPytorch.loadModel('blurry.pt', 'words.txt')
+  RNPytorch.loadModel('blurry', 'words')
     .then(() => console.log('done'))
     .catch(err => console.log(err));
   return (
